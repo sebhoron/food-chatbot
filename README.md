@@ -18,14 +18,14 @@ This project demonstrates a simple Retrieval-Augmented Generation (RAG) pipeline
 ## Installation
 
 1. Clone this repository:
-`git clone https://github.com/yourusername/haystack-rag-example.git
-cd haystack-rag-example`
+* `git clone https://github.com/sebhoron/haystack-example.git`
+* `cd haystack-example`
 2. Install the required packages:
 `pip install -r requirements.txt`
 3. Create a `.env` file in the project root and add your Azure OpenAI credentials:
-`AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
-`AZURE_OPENAI_KEY=your_api_key`
-`GENERATION_MODEL_NAME=your_model_deployment_name`
+* `AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
+* `AZURE_OPENAI_KEY=your_api_key`
+* `GENERATION_MODEL_NAME=your_model_deployment_name`
 
 ## Usage
 
