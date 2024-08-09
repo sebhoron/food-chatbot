@@ -1,13 +1,11 @@
-import os
 import json
+import os
+import gradio as gr
 from dotenv import load_dotenv
-from haystack.utils import Secret
 from haystack.dataclasses import ChatMessage
 from haystack.components.generators.chat import AzureOpenAIChatGenerator
-from haystack.components.generators.utils import print_streaming_chunk
 
 from tools import get_current_weather, rag_pipeline_func, tools
-
 
 def main():
     load_dotenv()
@@ -16,15 +14,12 @@ def main():
         ChatMessage.from_system(
             "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."
         ),
-        ChatMessage.from_user("Where does Mark live?"),
+        ChatMessage.from_user("WHat's the weather in Berlin?"),
     ]
 
     chat_generator = AzureOpenAIChatGenerator(
-        azure_endpoint="https://%s.openai.azure.com"
-        % os.getenv("AZURE_OPENAI_INSTANCE_NAME"),
-        api_key=Secret.from_token(os.getenv("AZURE_OPENAI_KEY")),
-        azure_deployment=os.getenv("GENERATION_MODEL_NAME"),
-        streaming_callback=print_streaming_chunk,
+        azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
+        api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
     )
     response = chat_generator.run(messages=messages, generation_kwargs={"tools": tools})
 
@@ -51,6 +46,57 @@ def main():
     response = chat_generator.run(messages=messages, generation_kwargs={"tools": tools})
 
     print(response)
+
+    def chatbot_with_fc(message, history):
+        messages.append(ChatMessage.from_user(message))
+        response = chat_generator.run(
+            messages=messages, generation_kwargs={"tools": tools}
+        )
+
+        while True:
+            if (
+                response
+                and response["replies"][0].meta["finish_reason"] == "tool_calls"
+            ):
+                function_calls = json.loads(response["replies"][0].content)
+                print(response["replies"][0])
+                for function_call in function_calls:
+                    ## Parse function calling information
+                    function_name = function_call["function"]["name"]
+                    function_args = json.loads(function_call["function"]["arguments"])
+
+                    ## Find the correspoding function and call it with the given arguments
+                    function_to_call = available_functions[function_name]
+                    function_response = function_to_call(**function_args)
+
+                    ## Append function response to the messages list using `ChatMessage.from_function`
+                    messages.append(
+                        ChatMessage.from_function(
+                            content=json.dumps(function_response), name=function_name
+                        )
+                    )
+                    response = chat_generator.run(
+                        messages=messages, generation_kwargs={"tools": tools}
+                    )
+
+            # Regular Conversation
+            else:
+                messages.append(response["replies"][0])
+                break
+        return response["replies"][0].content
+
+    demo = gr.ChatInterface(
+        fn=chatbot_with_fc,
+        examples=[
+            "Can you tell me where Giorgio lives?",
+            "What's the weather like in Madrid?",
+            "Who lives in London?",
+            "What's the weather like where Mark lives?",
+        ],
+        title="Ask me about weather or where people live!",
+    )
+
+    demo.launch()
 
 
 if __name__ == "__main__":

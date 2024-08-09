@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from haystack import Pipeline, Document
-from haystack.utils import Secret
 from haystack.document_stores.in_memory import InMemoryDocumentStore
 from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
 from haystack.components.generators import AzureOpenAIGenerator
@@ -33,10 +32,8 @@ retriever = InMemoryBM25Retriever(document_store=document_store)
 prompt_builder = PromptBuilder(template=prompt_template)
 
 llm = AzureOpenAIGenerator(
-    azure_endpoint="https://%s.openai.azure.com"
-    % os.getenv("AZURE_OPENAI_INSTANCE_NAME"),
-    api_key=Secret.from_token(os.getenv("AZURE_OPENAI_KEY")),
-    azure_deployment=os.getenv("GENERATION_MODEL_NAME"),
+    azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
+    api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
 )
 
 rag_pipeline = Pipeline()

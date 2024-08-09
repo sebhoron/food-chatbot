@@ -12,4 +12,4 @@ def get_current_weather(location: str):
         return WEATHER_INFO[location]
 
     else:
-        return {"weather": "sunny", "temperature": 21.8, "unit": "fahrenheit"}
+        return {"weather": "unkwown", "temperature": "unkwown", "unit": "unkwown"}
