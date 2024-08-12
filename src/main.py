@@ -14,7 +14,7 @@ def main():
         ChatMessage.from_system(
             "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."
         ),
-        ChatMessage.from_user("WHat's the weather in Berlin?"),
+        ChatMessage.from_user("What's the weather in Berlin?"),
     ]
 
     chat_generator = AzureOpenAIChatGenerator(
