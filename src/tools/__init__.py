@@ -1,5 +1,5 @@
 from .rag_pipeline_func import rag_pipeline_func
-from .get_current_weather import get_current_weather
+from .get_weather import get_weather
 
 tools = [
     {
@@ -22,8 +22,8 @@ tools = [
     {
         "type": "function",
         "function": {
-            "name": "get_current_weather",
-            "description": "Get the current weather",
+            "name": "get_weather",
+            "description": "Get weather",
             "parameters": {
                 "type": "object",
                 "properties": {

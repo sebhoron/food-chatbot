@@ -1,11 +1,12 @@
 import json
 import os
 import gradio as gr
+
 from dotenv import load_dotenv
 from haystack.dataclasses import ChatMessage
 from haystack.components.generators.chat import AzureOpenAIChatGenerator
 
-from tools import get_current_weather, rag_pipeline_func, tools
+from tools import get_weather, rag_pipeline_func, tools
 
 def main():
     load_dotenv()
@@ -32,7 +33,7 @@ def main():
     ## Find the correspoding function and call it with the given arguments
     available_functions = {
         "rag_pipeline_func": rag_pipeline_func,
-        "get_current_weather": get_current_weather,
+        "get_weather": get_weather,
     }
     function_to_call = available_functions[function_name]
     function_response = function_to_call(**function_args)
