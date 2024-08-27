@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "food-chatbot"
+version = "0.1.0"
+description = ""
+authors = ["sebhoron <92864754+sebhoron@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+gradio = "^4.42.0"
+haystack-ai = "^2.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
