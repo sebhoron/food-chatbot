@@ -23,16 +23,21 @@ tools = [
         "type": "function",
         "function": {
             "name": "get_weather",
-            "description": "Get weather",
+            "description": "Get current weather data for the specified location",
             "parameters": {
                 "type": "object",
                 "properties": {
                     "location": {
                         "type": "string",
-                        "description": "The city and state, e.g. San Francisco, CA",
-                    }
+                        "description": "The city and country abbreviation, e.g. London,UK",
+                    },
+                    "units": {
+                        "type": "string",
+                        "description": "The units that will be used when returning weather data, e.g. 'us' for imperial/fahrenheit or 'metric' for metric/celsius",
+                        "enum": ["us", "metric", "uk", "base"],
+                    },
                 },
-                "required": ["location"],
+                "required": ["location", "units"],
             },
         },
     },

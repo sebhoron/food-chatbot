@@ -1,10 +1,10 @@
-import os
 from dotenv import load_dotenv
 from haystack import Pipeline, Document
 from haystack.document_stores.in_memory import InMemoryDocumentStore
 from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
-from haystack.components.generators import AzureOpenAIGenerator
 from haystack.components.builders.prompt_builder import PromptBuilder
+
+from ..components import llm
 
 load_dotenv()
 
@@ -31,18 +31,15 @@ retriever = InMemoryBM25Retriever(document_store=document_store)
 
 prompt_builder = PromptBuilder(template=prompt_template)
 
-llm = AzureOpenAIGenerator(
-    azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
-    api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
-)
-
 rag_pipeline = Pipeline()
 rag_pipeline.add_component("retriever", retriever)
 rag_pipeline.add_component("prompt_builder", prompt_builder)
 rag_pipeline.add_component("llm", llm)
+
 rag_pipeline.connect("retriever", "prompt_builder.documents")
 rag_pipeline.connect("prompt_builder", "llm")
-rag_pipeline.draw(path="my_pipeline.png")
+
+rag_pipeline.draw(path="rag_pipeline.png")
 
 
 def rag_pipeline_func(query):

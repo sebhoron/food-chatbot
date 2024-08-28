@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 from haystack.dataclasses import ChatMessage
 from haystack.components.generators.chat import AzureOpenAIChatGenerator
 
-from tools import get_weather, rag_pipeline_func, tools
+from .tools import get_weather, rag_pipeline_func, tools
+
 
 def main():
     load_dotenv()
@@ -14,39 +15,19 @@ def main():
     messages = [
         ChatMessage.from_system(
             "Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."
-        ),
-        ChatMessage.from_user("What's the weather in Berlin?"),
+        )
     ]
 
     chat_generator = AzureOpenAIChatGenerator(
         azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
         api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
     )
-    response = chat_generator.run(messages=messages, generation_kwargs={"tools": tools})
-
-    function_call = json.loads(response["replies"][0].content)[0]
-    function_name = function_call["function"]["name"]
-    function_args = json.loads(function_call["function"]["arguments"])
-    print("Function Name:", function_name)
-    print("Function Arguments:", function_args)
 
     ## Find the correspoding function and call it with the given arguments
     available_functions = {
         "rag_pipeline_func": rag_pipeline_func,
         "get_weather": get_weather,
     }
-    function_to_call = available_functions[function_name]
-    function_response = function_to_call(**function_args)
-    print("Function Response:", function_response)
-
-    function_message = ChatMessage.from_function(
-        content=json.dumps(function_response), name=function_name
-    )
-    messages.append(function_message)
-
-    response = chat_generator.run(messages=messages, generation_kwargs={"tools": tools})
-
-    print(response)
 
     def chatbot_with_fc(message, history):
         messages.append(ChatMessage.from_user(message))
