@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "food-chatbot"
-version = "0.1.0"
+version = "0.1.2"
 description = ""
 authors = ["sebhoron <92864754+sebhoron@users.noreply.github.com>"]
 readme = "README.md"
