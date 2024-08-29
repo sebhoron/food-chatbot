@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from haystack.dataclasses import ChatMessage
 from haystack.components.generators.chat import AzureOpenAIChatGenerator
 
-from .tools import get_weather, rag_pipeline_func, tools
+from .tools import tools, get_weather, rag_pipeline_func, find_recipe_by_ingredients
 
 
 def main():
@@ -27,6 +27,7 @@ def main():
     available_functions = {
         "rag_pipeline_func": rag_pipeline_func,
         "get_weather": get_weather,
+        "find_recipe_by_ingredients": find_recipe_by_ingredients,
     }
 
     def chatbot_with_fc(message, history):
@@ -47,9 +48,14 @@ def main():
                     function_name = function_call["function"]["name"]
                     function_args = json.loads(function_call["function"]["arguments"])
 
+                    print("Function Name:", function_name)
+                    print("Function Arguments:", function_args)
+
                     ## Find the correspoding function and call it with the given arguments
                     function_to_call = available_functions[function_name]
                     function_response = function_to_call(**function_args)
+
+                    print("Function Response:", function_response)
 
                     ## Append function response to the messages list using `ChatMessage.from_function`
                     messages.append(
@@ -60,6 +66,8 @@ def main():
                     response = chat_generator.run(
                         messages=messages, generation_kwargs={"tools": tools}
                     )
+
+                    print(response)
 
             # Regular Conversation
             else:

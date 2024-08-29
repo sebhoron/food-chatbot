@@ -1,5 +1,6 @@
 from .rag_pipeline_func import rag_pipeline_func
 from .get_weather import get_weather
+from .find_recipe_by_ingredients import find_recipe_by_ingredients
 
 tools = [
     {
@@ -16,6 +17,27 @@ tools = [
                     }
                 },
                 "required": ["query"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "find_recipe_by_ingredients",
+            "description": "Search recipes by ingredients",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "ingredients": {
+                        "type": "string",
+                        "description": "A comma-separated list of ingredients that the recipes should contain, e.g. apples,flour,sugar",
+                    },
+                    "number": {
+                        "type": "number",
+                        "description": "The maximum number of recipes to return (between 1 and 100). Defaults to 2.",
+                    },
+                },
+                "required": ["ingredients"],
             },
         },
     },
