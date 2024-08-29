@@ -23,9 +23,12 @@ This project demonstrates a simple Retrieval-Augmented Generation (RAG) pipeline
 2. Install the required packages:
 `pip install -r requirements.txt`
 3. Create a `.env` file in the project root and add your Azure OpenAI credentials:
-* `AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
 * `AZURE_OPENAI_KEY=your_api_key`
-* `GENERATION_MODEL_NAME=your_model_deployment_name`
+* `AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
+* `AZURE_OPENAI_ENDPOINT0=your_instance_endpoint`
+* `AZURE_OPENAI_DEPLOYMENT_NAME=your_model_deployment_name`
+* `WEATHER_API=your_weather_api_key`
+* `FOOD_API=your_food_api_key`
 
 ## Usage
 
