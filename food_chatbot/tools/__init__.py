@@ -59,7 +59,7 @@ tools = [
                         "enum": ["us", "metric", "uk", "base"],
                     },
                 },
-                "required": ["location"],
+                "required": ["location", "units"],
             },
         },
     },
