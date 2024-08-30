@@ -8,7 +8,7 @@ load_dotenv()
 
 
 def get_weather(location: str, units: str = "metric"):
-    key = os.getenv("WEATHER_API")
+    key = os.getenv("VISUAL_CROSSING_WEATHER_API_KEY")
 
     url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
 
