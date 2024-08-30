@@ -1,59 +1,46 @@
-# Haystack Example
+# Food Chatbot
 
-This project demonstrates a simple Retrieval-Augmented Generation (RAG) pipeline using the Haystack framework and Azure OpenAI. It showcases how to create a basic question-answering system with a small in-memory document store.
+
+## Description
+
+This project demonstrates a tooling capabilities for LLMs using the Haystack framework and Azure OpenAI. It showcases how to create a basic question-answering system.
 
 ## Features
 
-- In-memory document store
-- BM25 retriever
+- Weather checker and recipe finder
 - Custom prompt template
 - Integration with Azure OpenAI for text generation
 - Visualizes the pipeline structure
 
 ## Prerequisites
 
-- Python 3.7+
+- [Git](https://git-scm.com/downloads)
+- [Python 3.10+](https://www.python.org/downloads/)
+- [Poetry](https://python-poetry.org/docs/)
 - An Azure OpenAI account with API access
+- A Spoonacular API key
+- Visual Crossing Weather API key
 
 ## Installation
 
 1. Clone this repository:
-* `git clone https://github.com/sebhoron/haystack-example.git`
-* `cd haystack-example`
+* `git clone https://github.com/sebhoron/food-chatbot.git`
+* `cd food-chatbot`
 2. Install the required packages:
-`pip install -r requirements.txt`
+`poetry shell`
+`poetry install`
 3. Create a `.env` file in the project root and add your Azure OpenAI credentials:
 * `AZURE_OPENAI_KEY=your_api_key`
 * `AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
 * `AZURE_OPENAI_ENDPOINT0=your_instance_endpoint`
 * `AZURE_OPENAI_DEPLOYMENT_NAME=your_model_deployment_name`
 * `VISUAL_CROSSING_WEATHER_API_KEY=your_weather_api_key`
-* `FOOD_API_KEY=your_food_api_key`
+* `SPOONACULAR_API_KEY=your_food_api_key`
 
 ## Usage
 
 Run the main script:
-`python main.py`
-
-This will:
-1. Set up an in-memory document store with sample data
-2. Create a RAG pipeline using Haystack components
-3. Run a sample question through the pipeline
-4. Generate a visualization of the pipeline structure
-
-## Pipeline Components
-
-- `InMemoryDocumentStore`: Stores the document collection
-- `InMemoryBM25Retriever`: Retrieves relevant documents based on the query
-- `PromptBuilder`: Constructs the prompt for the language model
-- `AzureOpenAIGenerator`: Generates answers using Azure OpenAI
-- `Pipeline`: Orchestrates the flow of data between components
-
-## Customization
-
-- Modify the `prompt_template` to change how the prompt is constructed
-- Add more documents to the `document_store` for a larger knowledge base
-- Adjust the pipeline structure or add new components as needed
+`poetry run python -m food-chatbot`
 
 ## License
 
