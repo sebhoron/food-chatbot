@@ -6,7 +6,13 @@ from dotenv import load_dotenv
 from haystack.dataclasses import ChatMessage
 from haystack.components.generators.chat import AzureOpenAIChatGenerator
 
-from .tools import tools, get_weather, rag_pipeline_func, find_recipe_by_ingredients
+from .tools import (
+    tools,
+    get_weather,
+    rag_pipeline_func,
+    find_recipe_by_ingredients,
+    get_recipe_details,
+)
 
 
 def main():
@@ -28,6 +34,7 @@ def main():
         "rag_pipeline_func": rag_pipeline_func,
         "get_weather": get_weather,
         "find_recipe_by_ingredients": find_recipe_by_ingredients,
+        "get_recipe_details": get_recipe_details,
     }
 
     def chatbot_with_fc(message, history):

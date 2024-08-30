@@ -24,12 +24,17 @@ This project demonstrates a tooling capabilities for LLMs using the Haystack fra
 ## Installation
 
 1. Clone this repository:
+
 * `git clone https://github.com/sebhoron/food-chatbot.git`
 * `cd food-chatbot`
+
 2. Install the required packages:
-`poetry shell`
-`poetry install`
+
+* `poetry shell`
+* `poetry install`
+
 3. Create a `.env` file in the project root and add your Azure OpenAI credentials:
+
 * `AZURE_OPENAI_KEY=your_api_key`
 * `AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
 * `AZURE_OPENAI_ENDPOINT0=your_instance_endpoint`

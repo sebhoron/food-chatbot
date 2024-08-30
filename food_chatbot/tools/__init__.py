@@ -1,6 +1,7 @@
 from .rag_pipeline_func import rag_pipeline_func
 from .get_weather import get_weather
 from .find_recipe_by_ingredients import find_recipe_by_ingredients
+from .get_recipe_details import get_recipe_details
 
 tools = [
     {
@@ -35,6 +36,31 @@ tools = [
                     "number": {
                         "type": "number",
                         "description": "The maximum number of recipes to return (between 1 and 100). Defaults to 2.",
+                    },
+                },
+                "required": ["ingredients"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_recipe_details",
+            "description": "Get full information about a recipe, such as ingredients, preparation, nutrition, diet and allergen information, etc. Only use when asked about a specific recipe",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "recipe_id": {
+                        "type": "number",
+                        "description": "The id of the recipe",
+                    },
+                    "includeNutrition": {
+                        "type": "boolean",
+                        "description": "Include nutrition data in the recipe information. Nutrition data is per serving.",
+                    },
+                    "add_wine_pairing": {
+                        "type": "boolean",
+                        "description": "Add a wine pairing to the recipe.",
                     },
                 },
                 "required": ["ingredients"],

@@ -12,7 +12,7 @@ def find_recipe_by_ingredients(
 ):
     api_key = os.getenv("SPOONACULAR_API_KEY")
 
-    url = f"https://api.spoonacular.com/recipes/findByIngredients"
+    url = "https://api.spoonacular.com/recipes/findByIngredients"
 
     r = requests.get(
         url,
