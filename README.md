@@ -27,8 +27,8 @@ This project demonstrates a simple Retrieval-Augmented Generation (RAG) pipeline
 * `AZURE_OPENAI_INSTANCE_NAME=your_instance_name`
 * `AZURE_OPENAI_ENDPOINT0=your_instance_endpoint`
 * `AZURE_OPENAI_DEPLOYMENT_NAME=your_model_deployment_name`
-* `WEATHER_API=your_weather_api_key`
-* `FOOD_API=your_food_api_key`
+* `VISUAL_CROSSING_WEATHER_API_KEY=your_weather_api_key`
+* `FOOD_API_KEY=your_food_api_key`
 
 ## Usage
 

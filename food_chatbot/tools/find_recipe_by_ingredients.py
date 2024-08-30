@@ -10,7 +10,7 @@ load_dotenv()
 def find_recipe_by_ingredients(
     ingredients: str, number: int = 2, ranking: int = 1, ignore_pantry: bool = True
 ):
-    apiKey = os.getenv("FOOD_API")
+    api_key = os.getenv("SPOONACULAR_API_KEY")
 
     url = f"https://api.spoonacular.com/recipes/findByIngredients"
 
@@ -20,8 +20,8 @@ def find_recipe_by_ingredients(
             "ingredients": ingredients,
             "number": number,
             "ranking": ranking,
-            "ignore_pantry": ignore_pantry,
-            "apiKey": apiKey,
+            "ignorePantry": ignore_pantry,
+            "apiKey": api_key,
         },
     )
 
