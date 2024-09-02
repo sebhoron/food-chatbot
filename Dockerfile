@@ -29,4 +29,4 @@ WORKDIR /app
 EXPOSE 7860
 ENV GRADIO_SERVER_NAME="0.0.0.0"
 
-CMD ["python", "-m", "food_chatbot.__main__"]
+CMD ["python", "-m", "food_chatbot"]
