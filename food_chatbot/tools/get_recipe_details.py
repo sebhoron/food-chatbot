@@ -3,9 +3,22 @@ import requests
 
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
+from haystack import Pipeline, Document
+from haystack_integrations.document_stores.mongodb_atlas import (
+    MongoDBAtlasDocumentStore,
+)
 
 
 load_dotenv()
+
+document_store = MongoDBAtlasDocumentStore(
+    database_name="recipe_details",
+    collection_name="food_chatbot",
+    vector_search_index="embedding_index",
+)
+
+recipe_details_pip = Pipeline()
+recipe_details_pip.add_component("retriever", retriever)
 
 
 def get_recipe_details(

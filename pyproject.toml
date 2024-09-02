@@ -11,6 +11,7 @@ gradio = "^4.42.0"
 haystack-ai = "^2.4.0"
 python-dotenv = "^1.0.1"
 beautifulsoup4 = "^4.12.3"
+mongodb-atlas-haystack = "^0.4.1"
 
 
 [tool.poetry.group.dev.dependencies]
