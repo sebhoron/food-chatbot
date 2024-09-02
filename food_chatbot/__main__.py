@@ -85,10 +85,8 @@ def main():
     demo = gr.ChatInterface(
         fn=chatbot_with_fc,
         examples=[
-            "Can you tell me where Giorgio lives?",
-            "What's the weather like in Madrid?",
-            "Who lives in London?",
-            "What's the weather like where Mark lives?",
+            "What can I cook with spinach, halloumi and tomatoes?",
+            "What's the weather like in London?",
         ],
         title="Ask me about weather or where people live!",
     )

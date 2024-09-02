@@ -1,3 +1,4 @@
+#Build
 FROM python:3.12-bookworm AS builder
 
 RUN pip install poetry==1.8.3
@@ -14,6 +15,7 @@ RUN touch README.md
 
 RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --no-root
 
+#Runtime
 FROM python:3.12-slim-bookworm AS runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
@@ -22,5 +24,7 @@ ENV VIRTUAL_ENV=/app/.venv \
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY food_chatbot ./food_chatbot
+
+EXPOSE 7860
 
 ENTRYPOINT ["python", "-m", "food_chatbot"]
