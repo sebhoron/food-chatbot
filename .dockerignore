@@ -6,3 +6,4 @@ LICENCE
 README.md
 .vscode
 .gitignore
+__pycache__

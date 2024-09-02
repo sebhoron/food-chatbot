@@ -1,30 +1,32 @@
-#Build
-FROM python:3.12-bookworm AS builder
+# Build stage
+FROM python:3.12-bookworm AS python-dev
 
 RUN pip install poetry==1.8.3
+
+WORKDIR /app
 
 ENV POETRY_NO_INTERACTION=1 \
   POETRY_VIRTUALENVS_IN_PROJECT=1 \
   POETRY_VIRTUALENVS_CREATE=1 \
   POETRY_CACHE_DIR=/tmp/poetry_cache
 
-WORKDIR /app
-
 COPY pyproject.toml poetry.lock ./
 RUN touch README.md
 
 RUN --mount=type=cache,target=$POETRY_CACHE_DIR poetry install --without dev --no-root
 
-#Runtime
+# Runtime stage
 FROM python:3.12-slim-bookworm AS runtime
 
-ENV VIRTUAL_ENV=/app/.venv \
-  PATH="/app/.venv/bin:$PATH"
+COPY --from=python-dev /app/.venv /app/.venv
 
-COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+ENV PATH="/app/.venv/bin:$PATH"
 
-COPY food_chatbot ./food_chatbot
+COPY . /app
+
+WORKDIR /app
 
 EXPOSE 7860
+ENV GRADIO_SERVER_NAME="0.0.0.0"
 
-ENTRYPOINT ["python", "-m", "food_chatbot"]
+CMD ["python", "-m", "food_chatbot.__main__"]
