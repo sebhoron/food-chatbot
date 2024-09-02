@@ -1,0 +1,11 @@
+services:
+  food-chatbot:
+    build:
+      context: .
+      target: runtime
+    ports:
+      - "7860:7860"
+    env_file:
+      - .env
+    image: food-chatbot
+    container_name: food-chatbot
