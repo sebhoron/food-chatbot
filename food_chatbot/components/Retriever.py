@@ -10,4 +10,5 @@ document_store = MongoDBAtlasDocumentStore(
     collection_name="food_chatbot",
     vector_search_index="embedding_index",
 )
+
 retriever = MongoDBAtlasEmbeddingRetriever(document_store=document_store)

@@ -3,10 +3,12 @@ import requests
 
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
-from haystack import Pipeline, Document
+from haystack import Pipeline
 from haystack_integrations.document_stores.mongodb_atlas import (
     MongoDBAtlasDocumentStore,
 )
+
+from ..components import retriever
 
 
 load_dotenv()
