@@ -1,3 +1,5 @@
+"""Module providing a function to get weather for specified location."""
+
 import os
 import requests
 
