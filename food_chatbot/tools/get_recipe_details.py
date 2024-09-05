@@ -33,15 +33,19 @@ def get_recipe_details(
 
     url = f"https://api.spoonacular.com/recipes/{recipe_id}/information"
 
-    r = requests.get(
-        url,
-        {
-            "includeNutrition": include_nutrition,
-            "addWinePairing": add_wine_pairing,
-            "addTasteData": add_taste_data,
-            "apiKey": api_key,
-        },
-    )
+    try:
+        r = requests.get(
+            url,
+            {
+                "includeNutrition": include_nutrition,
+                "addWinePairing": add_wine_pairing,
+                "addTasteData": add_taste_data,
+                "apiKey": api_key,
+            },
+            timeout=10,
+        )
+    except requests.exceptions.Timeout:
+        print("Timed out")
 
     data = r.json()
 

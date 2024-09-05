@@ -1,3 +1,5 @@
+"""Module providing a chatbot assistant."""
+
 import json
 import os
 import gradio as gr
@@ -16,11 +18,14 @@ from .tools import (
 
 
 def main():
+    """Run a chatbot application."""
     load_dotenv()
 
     messages = [
         ChatMessage.from_system(
-            "You are a friendly personal assistant. Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."
+            """You are a friendly personal assistant. 
+            Don't make assumptions about what values to plug into functions.
+            Ask for clarification if a user request is ambiguous."""
         )
     ]
 
@@ -37,7 +42,7 @@ def main():
         "get_recipe_details": get_recipe_details,
     }
 
-    def chatbot_with_fc(message, history):
+    def chatbot_with_fc(message):
         messages.append(ChatMessage.from_user(message))
         response = chat_generator.run(
             messages=messages, generation_kwargs={"tools": tools}
@@ -64,7 +69,7 @@ def main():
 
                     print("Function Response:", function_response)
 
-                    ## Append function response to the messages list using `ChatMessage.from_function`
+                    ## Append function response to the messages list
                     messages.append(
                         ChatMessage.from_function(
                             content=json.dumps(function_response), name=function_name
