@@ -34,7 +34,7 @@ def get_recipe_details(
     """Function to get recipe details.
 
     Args:
-        recipe_id (int): Id of the recipe
+        recipe_id (int): Id of the recipe.
         include_nutrition (bool, optional): Include nutrition data ps. Defaults to False.
         add_wine_pairing (bool, optional): Add a wine pairing to the recipe. Defaults to False.
         add_taste_data (bool, optional): Add taste data to the recipe. Defaults to False.
