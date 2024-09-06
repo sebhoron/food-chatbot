@@ -1,4 +1,4 @@
-"""LLM config file"""
+"""Module configuring llm component"""
 
 import os
 

@@ -1,3 +1,5 @@
+"""Module configuring retriever component"""
+
 from haystack_integrations.document_stores.mongodb_atlas import (
     MongoDBAtlasDocumentStore,
 )
