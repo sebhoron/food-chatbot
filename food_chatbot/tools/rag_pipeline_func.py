@@ -43,6 +43,14 @@ rag_pipeline.draw(path="rag_pipeline.png")
 
 
 def rag_pipeline_func(query):
+    """Function to retrieve data from documents
+
+    Args:
+        query (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     result = rag_pipeline.run(
         {
             "retriever": {"query": query},

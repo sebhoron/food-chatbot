@@ -1,3 +1,5 @@
+"""Module providing tools for chatbot to use."""
+
 from .rag_pipeline_func import rag_pipeline_func
 from .get_weather import get_weather
 from .find_recipe_by_ingredients import find_recipe_by_ingredients
@@ -14,7 +16,9 @@ tools = [
                 "properties": {
                     "query": {
                         "type": "string",
-                        "description": "The query to use in the search. Infer this from the user's message. It should be a question or a statement",
+                        "description": """The query to use in the search.
+                            Infer this from the user's message.
+                            It should be a question or a statement""",
                     }
                 },
                 "required": ["query"],
@@ -31,11 +35,13 @@ tools = [
                 "properties": {
                     "ingredients": {
                         "type": "string",
-                        "description": "A comma-separated list of ingredients that the recipes should contain, e.g. apples,flour,sugar",
+                        "description": """A comma-separated list of ingredients that 
+                        the recipes should contain, e.g. apples,flour,sugar""",
                     },
                     "number": {
                         "type": "number",
-                        "description": "The maximum number of recipes to return (between 1 and 100). Defaults to 2.",
+                        "description": """The maximum number of recipes 
+                        to return (between 1 and 100). Defaults to 2.""",
                     },
                 },
                 "required": ["ingredients"],
@@ -46,7 +52,9 @@ tools = [
         "type": "function",
         "function": {
             "name": "get_recipe_details",
-            "description": "Get full information about a recipe, such as ingredients, preparation, nutrition, diet and allergen information, etc. Only use when asked about a specific recipe",
+            "description": """Get full information about a recipe, such as ingredients, preparation, 
+            nutrition, diet and allergen information, etc. 
+            Only use when asked about a specific recipe""",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -56,7 +64,8 @@ tools = [
                     },
                     "includeNutrition": {
                         "type": "boolean",
-                        "description": "Include nutrition data in the recipe information. Nutrition data is per serving.",
+                        "description": """Include nutrition data in the recipe information. 
+                        Nutrition data is per serving.""",
                     },
                     "add_wine_pairing": {
                         "type": "boolean",
@@ -81,7 +90,8 @@ tools = [
                     },
                     "units": {
                         "type": "string",
-                        "description": "The units that will be used when returning weather data, e.g. 'us' for imperial/fahrenheit or 'metric' for metric/celsius",
+                        "description": """The units that will be used when returning weather data, 
+                        e.g. 'us' for imperial/fahrenheit or 'metric' for metric/celsius""",
                         "enum": ["us", "metric", "uk", "base"],
                     },
                 },
