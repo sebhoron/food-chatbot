@@ -18,7 +18,6 @@ from .tools import (
 
 
 def main():
-    """Run a chatbot application."""
     load_dotenv()
 
     messages = [
@@ -34,7 +33,6 @@ def main():
         api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
     )
 
-    ## Find the correspoding function and call it with the given arguments
     available_functions = {
         "rag_pipeline_func": rag_pipeline_func,
         "get_weather": get_weather,
