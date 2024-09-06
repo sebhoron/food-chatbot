@@ -1,30 +1,10 @@
 """Module providing tools for chatbot to use."""
 
-from .rag_pipeline_func import rag_pipeline_func
 from .get_weather import get_weather
 from .find_recipe_by_ingredients import find_recipe_by_ingredients
 from .get_recipe_details import get_recipe_details
 
 tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "rag_pipeline_func",
-            "description": "Get information about where people live",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": """The query to use in the search.
-                            Infer this from the user's message.
-                            It should be a question or a statement""",
-                    }
-                },
-                "required": ["query"],
-            },
-        },
-    },
     {
         "type": "function",
         "function": {
