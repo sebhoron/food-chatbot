@@ -4,21 +4,22 @@ import json
 import os
 import gradio as gr
 
-from dotenv import load_dotenv
 from haystack.dataclasses import ChatMessage
 from haystack.components.generators.chat import AzureOpenAIChatGenerator
 
 from .tools import (
     tools,
     get_weather,
-    rag_pipeline_func,
     find_recipe_by_ingredients,
     get_recipe_details,
 )
 
-
 def main():
-    load_dotenv()
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
 
     messages = [
         ChatMessage.from_system(
@@ -34,7 +35,6 @@ def main():
     )
 
     available_functions = {
-        "rag_pipeline_func": rag_pipeline_func,
         "get_weather": get_weather,
         "find_recipe_by_ingredients": find_recipe_by_ingredients,
         "get_recipe_details": get_recipe_details,
